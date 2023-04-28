@@ -1,28 +1,26 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Board, BoardStatus } from './boards.model';
-import { v1 } from 'uuid';
+import { BoardStatus } from './boards-status.enum';
 import { CreateBoardDto } from './dto/create-board.dto';
+import { BoardRepository } from './repositories/board.repository';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable() // nest 프로젝트 어디에서든 사용가능
 export class BoardsService {
-  private boards: Board[] = [];
+  constructor(
+    @InjectRepository(BoardRepository)
+    private boardRepository: BoardRepository,
+  ) {}
 
   getAllBoards() {
-    return this.boards;
+    return this.boardRepository.find({});
   }
 
-  createBoard(dto: CreateBoardDto) {
-    const board: Board = {
-      id: v1(),
-      status: BoardStatus.PUBLIC,
-      ...dto,
-    };
-    this.boards.push(board);
-    return board;
+  async createBoard(dto: CreateBoardDto) {
+    return await this.boardRepository.createBoard(dto);
   }
 
-  getBoardById(id: string) {
-    const board = this.boards.find((board) => board.id === id);
+  async getBoardById(id: number) {
+    const board = await this.boardRepository.findOne(id);
 
     if (!board) {
       throw new NotFoundException();
@@ -31,14 +29,26 @@ export class BoardsService {
     return board;
   }
 
-  deleteBoard(id: string) {
-    const existBoard = this.getBoardById(id);
-    this.boards = this.boards.filter((board) => board.id !== existBoard.id);
+  async deleteBoard(id: number) {
+    const result = await this.boardRepository.delete(id);
+
+    if (result.affected === 0) {
+      throw new NotFoundException('Cant find board item');
+    }
+
+    return result.affected > 0;
   }
 
-  updateBoardStatus(id: string, status: BoardStatus) {
-    const board = this.getBoardById(id);
+  async updateBoardStatus(id: number, status: BoardStatus) {
+    const board = await this.getBoardById(id);
+
+    if (!board) {
+      throw new NotFoundException();
+    }
+
     board.status = status;
+    await board.save();
+
     return board;
   }
 }

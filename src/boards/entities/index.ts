@@ -1,1 +1,1 @@
-export * from './board.entities';
+export * from './board.entity';
