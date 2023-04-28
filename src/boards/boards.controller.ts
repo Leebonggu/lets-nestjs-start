@@ -19,10 +19,10 @@ import { BoardStatusValidationPipe } from './pipe/board-status-validation.pipe';
 export class BoardsController {
   constructor(private boardsService: BoardsService) {}
 
-  // @Get()
-  // getAllBoards() {
-  //   return this.boardsService.getAllBoards();
-  // }
+  @Get()
+  getAllBoards() {
+    return this.boardsService.getAllBoards();
+  }
 
   @Get('/:id')
   getBoardById(@Param('id', ParseIntPipe) id: number) {
