@@ -47,3 +47,24 @@
 ## DTO
 - data transfer object
 - 계층간 데이터 교환을 위한 객체
+
+## Pipe
+- Injectable이 달린 클래스
+- 중간에서 데이터 확인 및 변환
+- Nest
+  - 메소드 호출 직전, 파이프를 삽입하고 파이프는 메소드로 향하는 인수를 수신하고, 이에 동작
+- 핸드러 레벨
+  - 컨트롤러에서 UsePipes를 이용해서 사용
+- 파라미터 레벨
+  - 파라미터 하나에만 사용가능
+- 글로벌 레벨
+  - 애플리케이션 전체에 적용
+- 빌트인 파이프가 몇개 있음
+- class-validator, class-transformer
+
+### Custom Pipe
+- PipeTransform 인터페이스를 새롭게 만들 커스텀 파이프에 구현해줘야 한다.
+- PipeTransform 모든 파이프에서 구현해야하는 인터페이스
+- transform(value, meta) 메소드 구현 필요
+  - 반환값은 라우트 핸들러로 전달
+  - 예외는 클라이언트로 전달
