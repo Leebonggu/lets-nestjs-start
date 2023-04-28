@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { BoardStatus } from './boards-status.enum';
 import { CreateBoardDto } from './dto/create-board.dto';
-import { BoardRepository } from './repositories/board.repository';
+import { BoardRepository } from './board.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable() // nest 프로젝트 어디에서든 사용가능
