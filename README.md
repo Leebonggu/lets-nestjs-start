@@ -68,3 +68,19 @@
 - transform(value, meta) 메소드 구현 필요
   - 반환값은 라우트 핸들러로 전달
   - 예외는 클라이언트로 전달
+
+## TypeORM
+- nodejs, typescript orm
+- 여러 DB 지원
+
+### ORM
+- 객체, 관계형DB 데이터를 자동으로 변형 및 연결하는 작업
+
+## Entity
+- 생(pure)쿼리를 대신하는 용도
+- ORM -> class를 이용한다.
+- 디비 테이블에 대한 설계도
+- @Entity -> Entity임을 선언
+
+## Repository
+- 엔티티 찾기, 삽입, 업데이트, 삭제 등을 처리
