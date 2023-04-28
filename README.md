@@ -43,3 +43,7 @@
 ## Model
 - 데이터의 형태
 - class or interface의 형태
+
+## DTO
+- data transfer object
+- 계층간 데이터 교환을 위한 객체
