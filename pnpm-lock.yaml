@@ -69,6 +69,9 @@ devDependencies:
   '@types/bcrypt':
     specifier: ^5.0.0
     version: 5.0.0
+  '@types/config':
+    specifier: ^3.3.0
+    version: 3.3.0
   '@types/express':
     specifier: ^4.17.13
     version: 4.17.13
@@ -1116,6 +1119,10 @@ packages:
     dependencies:
       '@types/connect': 3.4.35
       '@types/node': 16.0.0
+    dev: true
+
+  /@types/config@3.3.0:
+    resolution: {integrity: sha512-9kZSbl3/X3TVNowLCu5HFQdQmD+4287Om55avknEYkuo6R2dDrsp/EXEHUFvfYeG7m1eJ0WYGj+cbcUIhARJAQ==}
     dev: true
 
   /@types/connect@3.4.35:
