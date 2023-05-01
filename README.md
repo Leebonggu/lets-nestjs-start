@@ -114,3 +114,6 @@
 - Guards: 인증 미들웨어.
 - Interceptor: 응답 매핑 및 캐시 관리와 함께 요청로깅과 같은 전후 미들웨어
 - guards -> interceptor(before) -> pipe -> controller -> service -> controller -> interceptor(after) -> filter -> client
+
+## QueryBuilder
+- 생쿼리를 통해 디비값을 가져올 수 있음.

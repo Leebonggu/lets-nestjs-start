@@ -17,7 +17,13 @@ export class BoardsService {
   }
 
   async getMyBoards(user: User) {
-    return this.boardRepository.find({ user: { id: user.id } });
+    const boardBuilder = this.boardRepository.createQueryBuilder('board');
+
+    boardBuilder.where('board.userId = :userId', { userId: user.id });
+    const boards = await boardBuilder.getMany();
+
+    return boards;
+    // === SameThing return this.boardRepository.find({ user: { id: user.id } });
   }
 
   async createBoard(dto: CreateBoardDto, user: User) {
