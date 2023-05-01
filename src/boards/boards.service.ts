@@ -3,6 +3,7 @@ import { BoardStatus } from './boards-status.enum';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { BoardRepository } from './board.repository';
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/auth/entities/user.entity';
 
 @Injectable() // nest 프로젝트 어디에서든 사용가능
 export class BoardsService {
@@ -15,8 +16,12 @@ export class BoardsService {
     return this.boardRepository.find({});
   }
 
-  async createBoard(dto: CreateBoardDto) {
-    return await this.boardRepository.createBoard(dto);
+  async getMyBoards(user: User) {
+    return this.boardRepository.find({ user: { id: user.id } });
+  }
+
+  async createBoard(dto: CreateBoardDto, user: User) {
+    return await this.boardRepository.createBoard(dto, user);
   }
 
   async getBoardById(id: number) {
